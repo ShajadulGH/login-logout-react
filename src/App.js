@@ -25,8 +25,10 @@ function App() {
   };
 
   return (
-    <Context.Provider value={{ isLoggedIn: isLoggedIn }}>
-      <MainHeader onLogout={logoutHandler} />
+    <Context.Provider
+      value={{ isLoggedIn: isLoggedIn, onLogOut: loginHandler }}
+    >
+      <MainHeader />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
