@@ -58,8 +58,6 @@ const Login = (props) => {
   const { isValid: passIsValid } = gotPassword;
   // Use of useEffect() Hook
   useEffect(() => {
-    console.log("running");
-
     const timeout = setTimeout(() => {
       setFormIsValid(emailISValid && passIsValid);
     }, 1000);
