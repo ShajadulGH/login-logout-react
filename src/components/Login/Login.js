@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
@@ -42,28 +42,31 @@ const Login = (props) => {
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
     emailDispatch({ type: "USER_INPUT", value: event.target.value });
-    setFormIsValid(
-      event.target.value.includes("@") && gotPassword.value.trim().length > 6
-    );
+    // setFormIsValid(
+    //   event.target.value.includes("@") && gotPassword.value.trim().length > 6
+    // );
   };
 
   const passwordChangeHandler = (event) => {
     passwordDispatch({ type: "INPUT_PASS", value: event.target.value });
-    setFormIsValid(
-      event.target.value.trim().length > 6 && gotEmail.value.includes("@")
-    );
+    // setFormIsValid(
+    //   event.target.value.trim().length > 6 && gotEmail.value.includes("@")
+    // );
   };
+
+  const { isValid: emailISValid } = gotEmail;
+  const { isValid: passIsValid } = gotPassword;
   // Use of useEffect() Hook
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setFormIsValid(
-  //       enteredPassword.trim().length > 6 && enteredEmail.includes("@")
-  //     );
-  //   }, 1000);
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+  useEffect(() => {
+    console.log("running");
+
+    const timeout = setTimeout(() => {
+      setFormIsValid(emailISValid && passIsValid);
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [emailISValid, passIsValid]);
   const validateEmailHandler = () => {
     emailDispatch({ type: "INPUT_BLUR" });
   };
