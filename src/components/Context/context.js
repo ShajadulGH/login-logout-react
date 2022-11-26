@@ -5,7 +5,6 @@ const Context = React.createContext({
   onLogOut: () => {},
   onLogIn: (email, password) => {},
 });
-
 export const CotextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
